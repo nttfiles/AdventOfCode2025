@@ -6,7 +6,7 @@ fun main() {
 }
 
 class Day1(lines: List<String>) : Day() {
-    val rotations: List<Int> = lines.map {
+    val rotations = lines.map {
         var distance = it.substring(1).toIntOrNull() ?: 0
         if (it.first() == 'L') distance *= -1
 

@@ -10,13 +10,13 @@ fun main() {
 }
 
 class Day2(input: String) : Day() {
-    val ranges: List<LongRange> = input.split(",").map { r ->
+    val ranges = input.split(",").map { r ->
         val (from, to) = r.split("-").map { it.toLongOrNull() ?: 0 }
 
         from..to
     }
 
-    override fun part1(): Long = ranges.sumOf { r ->
+    override fun part1() = ranges.sumOf { r ->
         r.sumOf { n ->
             floor(log10(n.toDouble()) + 1).roundToInt().let { digits ->
                 val divisor = 10.pow(digits / 2) + 1
@@ -25,7 +25,7 @@ class Day2(input: String) : Day() {
         }
     }
 
-    override fun part2(): Long = ranges.sumOf { r ->
+    override fun part2() = ranges.sumOf { r ->
         r.sumOf { n ->
             floor(log10(n.toDouble()) + 1).roundToInt().let { digits ->
                 (1..digits / 2).any { period ->
