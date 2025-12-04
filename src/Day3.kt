@@ -1,4 +1,5 @@
 import utils.resource
+import utils.get
 
 fun main() {
     val lines = resource("Day3.txt").lines()
@@ -11,8 +12,8 @@ class Day3(lines: List<String>) : Day() {
     }
 
     override fun part1() = banks.sumOf { bank ->
-        val first = bank.slice(0..<bank.lastIndex).max()
-        val second = bank.slice(bank.indexOf(first) + 1..bank.lastIndex).max()
+        val first = bank[0..<bank.lastIndex].max()
+        val second = bank[bank.indexOf(first) + 1..bank.lastIndex].max()
 
         10 * first + second
     }
@@ -21,8 +22,8 @@ class Day3(lines: List<String>) : Day() {
         var remaining = bank
 
         (0..11).reversed().fold(0L) { res, idx ->
-            val next = remaining.slice(0..remaining.lastIndex - idx).max()
-            remaining = remaining.slice(remaining.indexOf(next) + 1..remaining.lastIndex)
+            val next = remaining[0..remaining.lastIndex - idx].max()
+            remaining = remaining[remaining.indexOf(next) + 1..remaining.lastIndex]
 
             res * 10 + next
         }
