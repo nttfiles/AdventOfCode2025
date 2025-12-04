@@ -1,9 +1,19 @@
 package utils
 
 typealias Matrix<T> = List<List<T>>
+typealias MutableMatrix<T> = MutableList<MutableList<T>>
 
 operator fun <T> Matrix<T>.get(i1: Int, i2: Int) = this[i1][i2]
+operator fun <T> Matrix<T>.get(i: Pair<Int, Int>) = this[i.first][i.second]
 fun <T> Matrix<T>.getOrNull(i1: Int, i2: Int) = this.getOrNull(i1)?.getOrNull(i2)
+
+operator fun <T> MutableMatrix<T>.set(i1: Int, i2: Int, value: T) {
+    this[i1][i2] = value
+}
+
+operator fun <T> MutableMatrix<T>.set(i: Pair<Int, Int>, value: T) {
+    this[i.first][i.second] = value
+}
 
 operator fun <T> List<T>.get(r: IntRange): List<T> = this.slice(r)
 operator fun <T> Matrix<T>.get(r1: IntRange, r2: IntRange): List<List<T>> = this.slice(r1).map { it.slice(r2) }
@@ -14,4 +24,4 @@ fun <T> Matrix<T>.indexed() = this.mapIndexed { i1, l ->
     }
 }
 
-fun <T> Matrix<T>.flipped() = List(this.first().size) { i2 -> List(this.size) { i1 -> this[i1, i2]} }
+fun <T> Matrix<T>.flipped() = List(this.first().size) { i2 -> List(this.size) { i1 -> this[i1, i2] } }
