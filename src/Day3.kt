@@ -21,7 +21,7 @@ class Day3(lines: List<String>) : Day() {
     override fun part2() = banks.sumOf { bank ->
         var remaining = bank
 
-        (0..11).reversed().fold(0L) { res, idx ->
+        (11 downTo 0).fold(0L) { res, idx ->
             val next = remaining[0..remaining.lastIndex - idx].max()
             remaining = remaining[remaining.indexOf(next) + 1..remaining.lastIndex]
 
