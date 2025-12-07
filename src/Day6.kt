@@ -30,7 +30,7 @@ class Day6(lines: List<String>) : Day() {
         when (it) {
             "+" -> Long::plus
             "*" -> Long::times
-            else -> throw Exception("Unexpected operator $it")
+            else -> error("Unexpected operator $it")
         }
     }
 
