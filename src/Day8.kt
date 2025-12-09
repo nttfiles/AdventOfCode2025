@@ -11,7 +11,7 @@ fun main() {
 class Day8(lines: List<String>) : Day() {
     val coordinates = lines.map { l ->
         val (x, y, z) = l.split(',').map { it.toLongOrNull() ?: 0 }
-        Coordinate(x, y, z)
+        Coordinate3d(x, y, z)
     }
 
     val distances = run {
@@ -26,7 +26,7 @@ class Day8(lines: List<String>) : Day() {
         }.sortedBy { it.second }
     }
 
-    override fun part1() = distances.take(1000).map { it.first }.fold(listOf<Set<Coordinate>>()) { sets, pair ->
+    override fun part1() = distances.take(1000).map { it.first }.fold(listOf<Set<Coordinate3d>>()) { sets, pair ->
         sets.toMutableList().apply {
             filter { pair.first in it || pair.second in it }.takeIf { it.isNotEmpty() }?.let { existing ->
                 removeAll(existing)
@@ -53,7 +53,7 @@ class Day8(lines: List<String>) : Day() {
     }
 }
 
-data class Coordinate(val x: Long, val y: Long, val z: Long)
+data class Coordinate3d(val x: Long, val y: Long, val z: Long)
 
-fun Coordinate.distanceTo(other: Coordinate) =
+fun Coordinate3d.distanceTo(other: Coordinate3d) =
     sqrt(abs(x - other.x).pow(2) + abs(y - other.y).pow(2) + abs(z - other.z).pow(2))
